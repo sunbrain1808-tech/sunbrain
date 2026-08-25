@@ -1,0 +1,350 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f39c12;
+    --text-color: #333;
+    --bg-color: #f4f7f6;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+body { 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    line-height: 1.6; 
+}
+
+/* Header */
+header { 
+    background-color: white; 
+    padding: 20px 10%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+}
+
+.logo { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: var(--primary-color); 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.search-btn { 
+    background-color: var(--primary-color); 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+/* Hero Section */
+.hero { 
+    text-align: center; 
+    padding: 60px 20px; 
+    background: linear-gradient(135deg, #4a90e2, #50e3c2); 
+    color: white; 
+}
+
+.hero h1 { 
+    font-size: 36px; 
+    margin-bottom: 15px; 
+}
+
+.hero p { 
+    font-size: 18px; 
+    margin-bottom: 25px; 
+    max-width: 600px; 
+    margin-inline: auto; 
+}
+
+/* Product Section */
+.container { 
+    padding: 40px 10%; 
+}
+
+.section-title { 
+    text-align: center; 
+    margin-bottom: 40px; 
+    font-size: 28px; 
+    color: #2c3e50; 
+}
+
+.grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+}
+
+/* Product Card */
+.card { 
+    background: white; 
+    border-radius: 10px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+    transition: transform 0.3s ease; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); 
+}
+
+/* Card Image Container */
+.card-img { 
+    background-color: #e9ecef; 
+    height: 220px; /* Tăng chiều cao một chút để ảnh bìa sách nhìn cân đối hơn */
+    width: 100%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; /* Bắt buộc: Giấu đi phần ảnh bị tràn ra ngoài khung */
+}
+
+/* Image styling inside the container */
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy khung mà không bị méo */
+    object-position: center top; /* Giữ lại phần nửa trên của ảnh (thường chứa tiêu đề sách) */
+    transition: transform 0.3s ease; /* Thêm hiệu ứng zoom nhẹ khi hover cho đẹp mắt */
+}
+
+/* Optional: Thêm hiệu ứng zoom ảnh khi trỏ chuột vào card */
+.card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.card-content { 
+    padding: 20px; 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.tag { 
+    display: inline-block; 
+    padding: 4px 10px; 
+    background: #ffe0b2; 
+    color: #e65100; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: bold; 
+    margin-bottom: 10px; 
+    align-self: flex-start; 
+}
+
+.card-title { 
+    font-size: 18px; 
+    font-weight: bold; 
+    margin-bottom: 10px; 
+}
+
+.card-desc { 
+    font-size: 14px; 
+    color: #666; 
+    margin-bottom: 15px; 
+    flex-grow: 1; 
+}
+
+.price-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-top: 1px solid #eee; 
+    padding-top: 15px; 
+}
+
+.price { 
+    font-size: 18px; 
+    font-weight: bold; 
+    color: var(--secondary-color); 
+}
+
+.buy-btn { 
+    background-color: var(--primary-color); 
+    color: white; 
+    text-decoration: none; 
+    padding: 8px 15px; 
+    border-radius: 5px; 
+    font-size: 14px; 
+    border: none; 
+    cursor: pointer; 
+    transition: background 0.3s; 
+}
+
+.buy-btn:hover { 
+    background-color: #357abd; 
+}
+
+/* Styling cho thanh tìm kiếm */
+.search-container input {
+    padding: 10px 15px 10px 35px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    width: 250px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    /* Thêm icon kính lúp vào background của input */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 12px center;
+    background-color: white;
+}
+
+.search-container input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+    width: 300px; /* Hiệu ứng mở rộng nhẹ khi click vào */
+}
+
+/* Class để ẩn thẻ sản phẩm khi bị lọc */
+.card.hidden {
+    display: none !important;
+}
+/* Nút Đăng nhập trên Header */
+.login-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Lớp phủ Modal */
+.modal {
+    display: none; /* Mặc định ẩn */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Nội dung form Đăng nhập */
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Nút X đóng cửa sổ */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close-btn:hover { color: #333; }
+
+/* Các trường nhập liệu */
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; }
+.input-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+.submit-btn { width: 100%; background: var(--primary-color); color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+.register-hint { text-align: center; margin-top: 15px; font-size: 14px; }
+
+/* Nhóm 2 nút tài khoản đi chung với nhau */
+.auth-actions {
+    display: flex;
+    gap: 15px; /* Khoảng cách giữa 2 nút */
+    align-items: center;
+}
+
+/* Giao diện nút Đăng ký trên Header */
+.register-btn-header {
+    background: transparent;
+    color: #555;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.register-btn-header:hover {
+    color: var(--primary-color);
+}
+/* Giao diện Trang cá nhân */
+.profile-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto; /* Căn giữa màn hình */
+}
+
+.profile-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.profile-card hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.profile-card h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+#purchaseHistory {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#purchaseHistory li {
+    padding: 12px;
+    background: #f9f9f9;
+    border-left: 4px solid var(--secondary-color);
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+/* Footer */
+footer { 
+    text-align: center; 
+    padding: 20px; 
+    background: #2c3e50; 
+    color: white; 
+    margin-top: 40px; 
+}
