@@ -246,3 +246,7 @@ if(registerForm) {
         }
     });
 }
+// --- CHẠY KIỂM TRA ĐĂNG NHẬP KHI TẢI TRANG ---
+window.onload = function() {
+    checkLoginStatus();
+};
