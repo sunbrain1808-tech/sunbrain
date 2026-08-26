@@ -32,13 +32,26 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
 // ==========================================
 
 function thanhToan(tenMon) {
+    // 1. KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP TRƯỚC TIÊN
+    const userString = localStorage.getItem('currentUser');
+    if (!userString) {
+        alert("Vui lòng đăng nhập tài khoản để tiến hành mua tài liệu nhé!");
+        openLoginModal(); // Lập tức bật khung đăng nhập lên màn hình
+        return; // Lệnh return này cực kỳ quan trọng: Nó sẽ dừng hàm lại ngay lập tức, không chạy phần tạo QR ở dưới nữa.
+    }
+
+    // 2. NẾU ĐÃ ĐĂNG NHẬP, TIẾP TỤC TẠO QR THANH TOÁN
     const NganHang = "BIDV"; 
     const SoTaiKhoan = "6612920731"; 
     const TenChuTaiKhoan = "LE MINH NHAT"; 
     
-    let giaTien = 49000; // Sửa lại giá mặc định thành 49k cho khớp với HTML của bạn
-    if (tenMon === 'Combo 2 Môn') { // Đổi tên cho khớp với HTML
+    let giaTien = 49000; // Giá mặc định
+    
+    // Kiểm tra tên món để set giá cho Combo
+    if (tenMon === 'Combo 2 Môn') { 
         giaTien = 79000; 
+    } else if (tenMon === 'Combo 3 Môn') {
+        giaTien = 107000; 
     }
 
     const noiDungCK = "Mua tai lieu " + tenMon;
