@@ -26,7 +26,28 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
         }
     });
 });
+// ==========================================
+// HỆ THỐNG CHUYỂN TRANG (MENU ĐIỀU HƯỚNG)
+// ==========================================
+function showSection(sectionId) {
+    // 1. Liệt kê ID của tất cả các trang
+    const allSections = ['homeSection', 'socialSection', 'otherSection', 'freeSection', 'profileSection'];
 
+    // 2. Ẩn toàn bộ các trang đi
+    allSections.forEach(id => {
+        const sec = document.getElementById(id);
+        if (sec) sec.style.display = 'none';
+    });
+
+    // 3. Chỉ bật hiển thị trang được người dùng bấm vào
+    const activeSec = document.getElementById(sectionId);
+    if (activeSec) activeSec.style.display = 'block';
+}
+
+// Cập nhật lại hàm showHome cũ của bạn để đồng bộ với menu mới
+function showHome() {
+    showSection('homeSection');
+}
 // ==========================================
 // 2. TÍNH NĂNG THANH TOÁN (TẠO QR CODE)
 // ==========================================
@@ -246,7 +267,3 @@ if(registerForm) {
         }
     });
 }
-// --- CHẠY KIỂM TRA ĐĂNG NHẬP KHI TẢI TRANG ---
-window.onload = function() {
-    checkLoginStatus();
-};

@@ -340,6 +340,70 @@ header {
     margin-bottom: 10px;
     border-radius: 4px;
 }
+/* ==========================================
+   CSS CHO THANH MENU
+   ========================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky; /* Giữ menu đứng im khi cuộn trang */
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: var(--primary-color, #2e8b57);
+}
+/* ==========================================
+   CSS CHO KHUNG THÔNG BÁO TRANG CHỦ
+   ========================================== */
+.announcement-box {
+    display: flex;
+    align-items: center;
+    background-color: #e8f4fd; /* Màu nền xanh nhạt dịu mắt */
+    border-left: 5px solid #3498db; /* Đường viền xanh đậm bên trái */
+    padding: 15px 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.announcement-icon {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.announcement-text {
+    font-size: 16px;
+    color: #2c3e50;
+    line-height: 1.5;
+}
+
+/* Đổi màu chữ nhấn mạnh */
+.announcement-text strong {
+    color: #e74c3c; /* Màu đỏ nổi bật cho chữ "Thông báo" */
+}
 /* Footer */
 footer { 
     text-align: center; 

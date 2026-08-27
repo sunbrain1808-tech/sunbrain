@@ -4,136 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunbrain - Kho Tài Liệu Môn Đại Cương</title>
-    <!-- Liên kết đến file CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
+    <!-- ========================================== -->
+    <!-- THANH ĐIỀU HƯỚNG (NAVBAR) -->
+    <!-- ========================================== -->
+    <nav class="navbar">
+        <div class="nav-logo" style="cursor: pointer;" onclick="showSection('homeSection')">
+            <h2 style="color: var(--primary-color, #2e8b57); margin: 0;">📚 Sunbrain</h2>
+        </div>
         
-        <!-- 1. Logo -->
-        <div class="logo">📚 Sunbrain</div>
-        
-        <!-- 2. Khung tìm kiếm -->
+        <ul class="nav-links">
+            <li><a href="#" onclick="showSection('homeSection')">Trang chủ</a></li>
+            <li><a href="#" onclick="showSection('socialSection')">Môn Xã hội</a></li>
+            <li><a href="#" onclick="showSection('otherSection')">Môn khác</a></li>
+            <li><a href="#" onclick="showSection('freeSection')">Tài liệu Free</a></li>
+        </ul>
+
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="🔍 Tìm môn học (VD: Triết học)...">
+            <input type="text" id="searchInput" placeholder="🔍 Tìm môn học...">
         </div>
 
-        <!-- 3. Nhóm nút Đăng ký & Đăng nhập -->
         <div class="auth-actions" id="authActions">
             <button class="register-btn-header" onclick="openRegister()">Đăng ký</button>
             <button class="login-btn" onclick="openLoginModal()">👤 Đăng nhập</button>
         </div>
-    </header>
+    </nav>
 
-    <section class="hero">
-        <h1>Bứt Phá Điểm Số Các Môn Đại Cương</h1>
-        <p>Hệ thống đề cương, test bank và bản giải chi tiết bám sát chương trình đào tạo. Không lan man, ôn trúng phóc trọng tâm kỳ thi.</p>
-    </section>
+    <!-- ========================================== -->
+    <!-- 1. TRANG CHỦ -->
+    <!-- ========================================== -->
+    <!-- ========================================== -->
+    <!-- 1. TRANG CHỦ -->
+    <!-- ========================================== -->
+    <div id="homeSection">
+        <section class="hero">
+            <h1>Bứt Phá Điểm Số Các Môn Đại Cương</h1>
+            <p>Hệ thống đề cương, test bank và bản giải chi tiết bám sát chương trình đào tạo. Không lan man, ôn trúng phóc trọng tâm kỳ thi.</p>
+        </section>
 
-    <div class="container">
-        <h2 class="section-title">🔥 Trọn Bộ Tài Liệu Lý Luận Chính Trị</h2>
-        
-        <div class="grid">
-            <!-- Sản phẩm 1 -->
-            <div class="card">
-                <div class="card-img"><img src="triết.png" alt="Triết học Mác - Lênin"></div>
-                <div class="card-content">
-                    <span class="tag">Môn Đại Cương</span>
-                    <h3 class="card-title">Triết học Mác - Lênin</h3>
-                    <p class="card-desc">Tổng hợp câu hỏi trắc nghiệm và tự luận có đáp án chuẩn. Đã lọc bỏ các phần giảm tải, highlight từ khóa quan trọng.</p>
-                    <div class="price-row">
-                        <span class="price">49.000đ</span>
-                        <button class="buy-btn" onclick="thanhToan('Triết học')">Mua ngay</button>
-                    </div>
+        <!-- ========================================== -->
+        <!-- KHU VỰC THÔNG BÁO (BẠN SỬA NỘI DUNG Ở ĐÂY SAU) -->
+        <!-- ========================================== -->
+        <div class="container">
+            <div class="announcement-box">
+                <div class="announcement-icon">📢</div>
+                <div class="announcement-text">
+                    <strong>Thông báo mới nhất:</strong> Hệ thống đang cập nhật bộ đề cương thi cuối kỳ.!
                 </div>
             </div>
+        </div>
+        <!-- ========================================== -->
 
-            <!-- Sản phẩm 2 -->
-            <div class="card">
-                <div class="card-img"><img src="ktct.png" alt="Kinh tế Chính trị Mác - Lênin"></div>
-                <div class="card-content">
-                    <span class="tag">Môn Đại Cương</span>
-                    <h3 class="card-title">Kinh tế Chính trị Mác - Lênin</h3>
-                    <p class="card-desc">Ngân hàng đề thi trắc nghiệm đầy đủ các chương, bám sát giáo trình mới nhất kèm giải thích đáp án chi tiết.</p>
-                    <div class="price-row">
-                        <span class="price">49.000đ</span>
-                        <button class="buy-btn" onclick="thanhToan('Kinh tế Chính trị')">Mua ngay</button>
+        <div class="container">
+            <h2 class="section-title">🔥 Các Combo Ưu Đãi Hot Nhất</h2>
+                <!-- Banner Khuyến mãi / Combo -->
+                <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
+                    <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 2 Môn Đại Cương"></div>
+                    <div class="card-content">
+                        <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
+                        <h3 class="card-title" style="color: white;">Combo 2 Môn Đại Cương</h3>
+                        <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 2 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
+                        <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
+                            <span class="price" style="color: white;">79.000đ</span>
+                            <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 2 Môn')">Chốt Combo</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
+                    <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 3 Môn Đại Cương"></div>
+                    <div class="card-content">
+                        <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
+                        <h3 class="card-title" style="color: white;">Combo 3 Môn Đại Cương</h3>
+                        <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 3 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
+                        <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
+                            <span class="price" style="color: white;">107.000đ</span>
+                            <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 3 Môn')">Chốt Combo</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Sản phẩm 3 -->
-            <div class="card">
-                <div class="card-img"><img src="CNXH.png" alt="Chủ nghĩa Xã hội Khoa học"></div>
-                <div class="card-content">
-                    <span class="tag">Môn Đại Cương</span>
-                    <h3 class="card-title">Chủ nghĩa Xã hội Khoa học</h3>
-                    <p class="card-desc">Tài liệu ôn tập ngắn gọn, sơ đồ hóa các luận điểm giúp học thuộc nhanh, nhớ lâu, tự tin lấy trọn điểm tự luận.</p>
-                    <div class="price-row">
-                        <span class="price">49.000đ</span>
-                        <button class="buy-btn" onclick="thanhToan('Chủ nghĩa Xã hội Khoa học')">Mua ngay</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sản phẩm 4 -->
-            <div class="card">
-                <div class="card-img"><img src="tthcm.png" alt="Tư tưởng Hồ Chí Minh"></div>
-                <div class="card-content">
-                    <span class="tag">Môn Đại Cương</span>
-                    <h3 class="card-title">Tư tưởng Hồ Chí Minh</h3>
-                    <p class="card-desc">Bộ đề cương chi tiết kèm sơ đồ tư duy (mindmap) từng chương. Phân tích rõ các luận điểm cốt lõi.</p>
-                    <div class="price-row">
-                        <span class="price">49.000đ</span>
-                        <button class="buy-btn" onclick="thanhToan('Tư tưởng Hồ Chí Minh')">Mua ngay</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sản phẩm 5 -->
-            <div class="card">
-                <div class="card-img"><img src="LSĐ.png" alt="Lịch sử Đảng Cộng sản VN"></div>
-                <div class="card-content">
-                    <span class="tag">Môn Đại Cương</span>
-                    <h3 class="card-title">Lịch sử Đảng Cộng sản VN</h3>
-                    <p class="card-desc">Tổng hợp các mốc sự kiện lịch sử quan trọng, các kỳ Đại hội và bài tập tự luận thường gặp trong đề thi.</p>
-                    <div class="price-row">
-                        <span class="price">49.000đ</span>
-                        <button class="buy-btn" onclick="thanhToan('Lịch sử Đảng')">Mua ngay</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Banner Khuyến mãi / Combo -->
-            <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
-                <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 2 Môn Đại Cương"></div>
-                <div class="card-content">
-                    <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
-                    <h3 class="card-title" style="color: white;">Combo 2 Môn Đại Cương</h3>
-                    <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 2 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
-                    <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
-                        <span class="price" style="color: white;">79.000đ</span>
-                        <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 2 Môn')">Chốt Combo</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
-                <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 3 Môn Đại Cương"></div>
-                <div class="card-content">
-                    <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
-                    <h3 class="card-title" style="color: white;">Combo 3 Môn Đại Cương</h3>
-                    <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 3 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
-                    <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);;">
-                        <span class="price" style="color: white;">107.000đ</span>
-                        <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 3 Môn')">Chốt Combo</button>
-                    </div>
-                </div>
-            </div>
-            
         </div>
     </div>
-<!-- Giao diện Tài khoản người dùng (Mặc định ẩn) -->
+
+    <!-- ========================================== -->
+    <!-- 2. TRANG MÔN XÃ HỘI -->
+    <!-- ========================================== -->
+    <div id="socialSection" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">📚 Trọn Bộ Tài Liệu Lý Luận Chính Trị</h2>
+            <div class="grid">
+                <!-- Sản phẩm 1 -->
+                <div class="card">
+                    <div class="card-img"><img src="triết.png" alt="Triết học Mác - Lênin"></div>
+                    <div class="card-content">
+                        <span class="tag">Môn Đại Cương</span>
+                        <h3 class="card-title">Triết học Mác - Lênin</h3>
+                        <p class="card-desc">Tổng hợp câu hỏi trắc nghiệm và tự luận có đáp án chuẩn. Đã lọc bỏ các phần giảm tải, highlight từ khóa quan trọng.</p>
+                        <div class="price-row">
+                            <span class="price">49.000đ</span>
+                            <button class="buy-btn" onclick="thanhToan('Triết học')">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 2 -->
+                <div class="card">
+                    <div class="card-img"><img src="ktct.png" alt="Kinh tế Chính trị Mác - Lênin"></div>
+                    <div class="card-content">
+                        <span class="tag">Môn Đại Cương</span>
+                        <h3 class="card-title">Kinh tế Chính trị Mác - Lênin</h3>
+                        <p class="card-desc">Ngân hàng đề thi trắc nghiệm đầy đủ các chương, bám sát giáo trình mới nhất kèm giải thích đáp án chi tiết.</p>
+                        <div class="price-row">
+                            <span class="price">49.000đ</span>
+                            <button class="buy-btn" onclick="thanhToan('Kinh tế Chính trị')">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 3 -->
+                <div class="card">
+                    <div class="card-img"><img src="CNXH.png" alt="Chủ nghĩa Xã hội Khoa học"></div>
+                    <div class="card-content">
+                        <span class="tag">Môn Đại Cương</span>
+                        <h3 class="card-title">Chủ nghĩa Xã hội Khoa học</h3>
+                        <p class="card-desc">Tài liệu ôn tập ngắn gọn, sơ đồ hóa các luận điểm giúp học thuộc nhanh, nhớ lâu, tự tin lấy trọn điểm tự luận.</p>
+                        <div class="price-row">
+                            <span class="price">49.000đ</span>
+                            <button class="buy-btn" onclick="thanhToan('Chủ nghĩa Xã hội Khoa học')">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 4 -->
+                <div class="card">
+                    <div class="card-img"><img src="tthcm.png" alt="Tư tưởng Hồ Chí Minh"></div>
+                    <div class="card-content">
+                        <span class="tag">Môn Đại Cương</span>
+                        <h3 class="card-title">Tư tưởng Hồ Chí Minh</h3>
+                        <p class="card-desc">Bộ đề cương chi tiết kèm sơ đồ tư duy (mindmap) từng chương. Phân tích rõ các luận điểm cốt lõi.</p>
+                        <div class="price-row">
+                            <span class="price">49.000đ</span>
+                            <button class="buy-btn" onclick="thanhToan('Tư tưởng Hồ Chí Minh')">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 5 -->
+                <div class="card">
+                    <div class="card-img"><img src="LSĐ.png" alt="Lịch sử Đảng Cộng sản VN"></div>
+                    <div class="card-content">
+                        <span class="tag">Môn Đại Cương</span>
+                        <h3 class="card-title">Lịch sử Đảng Cộng sản VN</h3>
+                        <p class="card-desc">Tổng hợp các mốc sự kiện lịch sử quan trọng, các kỳ Đại hội và bài tập tự luận thường gặp trong đề thi.</p>
+                        <div class="price-row">
+                            <span class="price">49.000đ</span>
+                            <button class="buy-btn" onclick="thanhToan('Lịch sử Đảng')">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. TRANG MÔN KHÁC -->
+    <!-- ========================================== -->
+    <div id="otherSection" style="display: none;">
+        <div class="container" style="padding: 100px 20px; text-align: center;">
+            <h2>⏳ Các môn học khác</h2>
+            <p style="color: #666; margin-top: 15px;">Hệ thống đang cập nhật dữ liệu tài liệu cho khối môn này. Bạn quay lại sau nhé!</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. TRANG TÀI LIỆU FREE -->
+    <!-- ========================================== -->
+    <div id="freeSection" style="display: none;">
+        <div class="container" style="padding: 100px 20px; text-align: center;">
+            <h2>🎁 Tài liệu Miễn phí</h2>
+            <p style="color: #666; margin-top: 15px;">Các tài liệu ôn tập miễn phí sẽ sớm được tải lên đây để hỗ trợ các bạn ôn thi.</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- GIAO DIỆN TÀI KHOẢN -->
+    <!-- ========================================== -->
     <div class="container" id="profileSection" style="display: none;">
         <h2 class="section-title">👤 Thông tin tài khoản</h2>
         <div class="profile-card">
@@ -144,23 +203,20 @@
             <ul id="purchaseHistory">
                 <li>Bạn chưa mua tài liệu nào.</li>
             </ul>
-            <button class="buy-btn" onclick="showHome()" style="margin-top: 20px;">⬅ Quay lại kho tài liệu</button>
+            <button class="buy-btn" onclick="showHome()" style="margin-top: 20px;">⬅ Quay lại Trang chủ</button>
         </div>
     </div>
-<!-- (Phần trên giữ nguyên...) -->
-    
+
     <footer>
         <p>© 2026 Sunbrain. Học thông minh - Điểm vững vàng.</p>
     </footer>
 
-    <!-- ĐƯA TOÀN BỘ MODAL LÊN TRÊN THẺ SCRIPT -->
     <!-- Khung Modal Đăng nhập / Đăng ký -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeLoginModal()">&times;</span>
             <h2 id="modalTitle">Đăng nhập hệ thống</h2>
             
-            <!-- Form Đăng nhập -->
             <form id="loginForm">
                 <div class="input-group">
                     <label>Email</label>
@@ -174,7 +230,6 @@
                 <p class="register-hint">Chưa có tài khoản? <a href="#" onclick="toggleAuthForms('register')">Đăng ký ngay</a></p>
             </form>
 
-            <!-- Form Đăng ký (Mặc định ẩn) -->
             <form id="registerForm" style="display: none;">
                 <div class="input-group">
                     <label>Họ và tên</label>
@@ -194,8 +249,6 @@
         </div>
     </div>
 
-    <!-- LIÊN KẾT JS PHẢI NẰM CUỐI CÙNG -->
     <script src="script.js"></script>
-
 </body>
 </html>
