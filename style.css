@@ -478,7 +478,91 @@ body {
     margin-bottom: 10px;
     border-radius: 4px;
 }
+/* ==========================================
+   CSS RESPONSIVE (TƯƠNG THÍCH ĐIỆN THOẠI & TABLET)
+   ========================================== */
 
+/* Chỉ áp dụng các lệnh này khi màn hình nhỏ hơn 768px (Điện thoại/Tablet nhỏ) */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Thanh Menu (Navbar) dồn thành cột dọc */
+    .navbar {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .search-container input {
+        width: 100%;
+        max-width: 300px;
+    }
+    .search-container input:focus {
+        width: 100%;
+    }
+
+    /* 2. Thu nhỏ chữ ở phần Giới thiệu (Hero) */
+    .hero {
+        padding: 40px 15px;
+    }
+    .hero h1 {
+        font-size: 26px;
+    }
+    .hero p {
+        font-size: 15px;
+    }
+
+    /* 3. Thu nhỏ khoảng cách hai bên lề */
+    .container {
+        padding: 30px 15px;
+    }
+    
+    /* 4. Ép danh sách sản phẩm hiển thị 1 cột duy nhất */
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* 5. Căn chỉnh Banner Slider cho điện thoại */
+    .slide img {
+        height: 220px; /* Giảm chiều cao banner để không chiếm hết màn hình */
+    }
+    .slide-text {
+        font-size: 14px;
+        bottom: 25px;
+        width: 90%;
+        text-align: center;
+        padding: 8px 10px;
+    }
+    .slider-btn {
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    /* 6. Hộp thông báo (Announcement) */
+    .announcement-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    .announcement-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    /* 7. Thu gọn Form Đăng nhập và Khung thông tin cá nhân */
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+    .profile-card {
+        padding: 20px;
+        width: 100%;
+    }
+}
 /* ==========================================
    FOOTER
    ========================================== */
