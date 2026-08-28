@@ -21,7 +21,8 @@ DB_FILE = "users_db.json"
 def load_users():
     """Hàm đọc dữ liệu tài khoản từ ổ cứng"""
     if not os.path.exists(DB_FILE):
-        return {"sinhvien@tdtu.edu.vn": {"password": "123", "name": "Nguyễn Văn A"}}
+        # Đã cập nhật thêm mảng purchases mặc định
+        return {"sinhvien@tdtu.edu.vn": {"password": "123", "name": "Nguyễn Văn A", "purchases": []}}
     
     with open(DB_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -47,6 +48,11 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
 
+# THÊM: Model dữ liệu để nhận yêu cầu lưu lịch sử mua hàng
+class PurchaseRequest(BaseModel):
+    email: str
+    item: str
+
 # --- 5. TẠO CÁC API ENDPOINTS ---
 
 @app.get("/")
@@ -66,10 +72,11 @@ def register(request: RegisterRequest):
     if request.email in users_db:
         raise HTTPException(status_code=400, detail="Email này đã được sử dụng!")
     
-    # Thêm người dùng mới vào danh sách
+    # Thêm người dùng mới vào danh sách kèm danh sách purchases rỗng
     users_db[request.email] = {
         "password": request.password,
-        "name": request.name
+        "name": request.name,
+        "purchases": []
     }
     
     save_users(users_db) # Lưu toàn bộ danh sách mới xuống ổ cứng
@@ -87,9 +94,31 @@ def login(request: LoginRequest):
         return {
             "status": "success", 
             "message": "Đăng nhập thành công!",
-            "user_info": {"name": user["name"], "email": request.email}
+            "user_info": {
+                "name": user["name"], 
+                "email": request.email,
+                # THÊM: Trả về cả lịch sử mua hàng để Frontend lưu vào trình duyệt
+                "purchases": user.get("purchases", []) 
+            }
         }
     
     raise HTTPException(status_code=401, detail="Email hoặc mật khẩu không đúng")
 
-# Lệnh chạy server (dùng trong terminal): py -m uvicorn main:app --reload
+# THÊM: API XỬ LÝ LƯU LỊCH SỬ MUA HÀNG VÀO DATABASE MÁY CHỦ
+@app.post("/api/purchase")
+def record_purchase(req: PurchaseRequest):
+    users_db = load_users()
+    
+    if req.email not in users_db:
+        raise HTTPException(status_code=404, detail="Không tìm thấy tài khoản")
+        
+    # Tạo danh sách lịch sử nếu user này chưa có
+    if "purchases" not in users_db[req.email]:
+        users_db[req.email]["purchases"] = []
+        
+    # Thêm môn học vào danh sách (nếu chưa mua trước đó)
+    if req.item not in users_db[req.email]["purchases"]:
+        users_db[req.email]["purchases"].append(req.item)
+        save_users(users_db) # Lưu lại vào file JSON
+        
+    return {"message": "Lưu thành công", "purchases": users_db[req.email]["purchases"]}
