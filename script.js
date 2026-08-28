@@ -26,49 +26,96 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
         }
     });
 });
+
 // ==========================================
 // HỆ THỐNG CHUYỂN TRANG (MENU ĐIỀU HƯỚNG)
 // ==========================================
 function showSection(sectionId) {
-    // 1. Liệt kê ID của tất cả các trang
     const allSections = ['homeSection', 'socialSection', 'otherSection', 'freeSection', 'profileSection'];
 
-    // 2. Ẩn toàn bộ các trang đi
     allSections.forEach(id => {
         const sec = document.getElementById(id);
         if (sec) sec.style.display = 'none';
     });
 
-    // 3. Chỉ bật hiển thị trang được người dùng bấm vào
     const activeSec = document.getElementById(sectionId);
     if (activeSec) activeSec.style.display = 'block';
 }
 
-// Cập nhật lại hàm showHome cũ của bạn để đồng bộ với menu mới
 function showHome() {
     showSection('homeSection');
 }
+
 // ==========================================
-// 2. TÍNH NĂNG THANH TOÁN (TẠO QR CODE)
+// TÍNH NĂNG BANNER SLIDER (TỰ ĐỘNG CHUYỂN)
+// ==========================================
+let slideIndex = 0;
+let slideInterval;
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+    
+    if (slides.length === 0) return; // Nếu không có banner thì bỏ qua
+
+    if (n >= slides.length) { slideIndex = 0; }
+    if (n < 0) { slideIndex = slides.length - 1; }
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex].style.display = "block";
+    dots[slideIndex].className += " active";
+}
+
+// Bấm mũi tên
+function changeSlide(n) {
+    slideIndex += n;
+    showSlides(slideIndex);
+    resetAutoSlide(); // Khởi động lại bộ đếm khi người dùng tự bấm
+}
+
+// Bấm dấu chấm
+function currentSlide(n) {
+    slideIndex = n;
+    showSlides(slideIndex);
+    resetAutoSlide();
+}
+
+// Hàm tự động chuyển ảnh
+function autoSlide() {
+    slideIndex++;
+    showSlides(slideIndex);
+}
+
+// Hàm khởi động lại thời gian 
+function resetAutoSlide() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(autoSlide, 4000); // Cứ 4 giây tự chuyển 1 lần
+}
+
+// ==========================================
+// 2. TÍNH NĂNG THANH TOÁN & LƯU LỊCH SỬ (TẠO QR CODE)
 // ==========================================
 
 function thanhToan(tenMon) {
-    // 1. KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP TRƯỚC TIÊN
     const userString = localStorage.getItem('currentUser');
     if (!userString) {
         alert("Vui lòng đăng nhập tài khoản để tiến hành mua tài liệu nhé!");
-        openLoginModal(); // Lập tức bật khung đăng nhập lên màn hình
-        return; // Lệnh return này cực kỳ quan trọng: Nó sẽ dừng hàm lại ngay lập tức, không chạy phần tạo QR ở dưới nữa.
+        openLoginModal(); 
+        return; 
     }
 
-    // 2. NẾU ĐÃ ĐĂNG NHẬP, TIẾP TỤC TẠO QR THANH TOÁN
     const NganHang = "BIDV"; 
     const SoTaiKhoan = "6612920731"; 
     const TenChuTaiKhoan = "LE MINH NHAT"; 
     
-    let giaTien = 49000; // Giá mặc định
+    let giaTien = 49000; 
     
-    // Kiểm tra tên món để set giá cho Combo
     if (tenMon === 'Combo 2 Môn') { 
         giaTien = 79000; 
     } else if (tenMon === 'Combo 3 Môn') {
@@ -82,6 +129,45 @@ function thanhToan(tenMon) {
     
     if (xacNhan) {
         window.open(linkQR, "_blank");
+
+        setTimeout(() => {
+            const daChuyenKhoan = confirm("Hệ thống: Bạn đã hoàn tất chuyển khoản chưa?\n(Bấm OK để xác nhận và nhận tài liệu về máy)");
+            
+            if (daChuyenKhoan) {
+                luuLichSuMuaHang(tenMon);
+                alert("🎉 Thanh toán thành công! Tài liệu đã được thêm vào mục 'Lịch sử mua hàng' trong tài khoản của bạn.");
+            }
+        }, 2000); 
+    }
+}
+
+async function luuLichSuMuaHang(tenMon) {
+    let userString = localStorage.getItem('currentUser');
+    if (!userString) return;
+    let user = JSON.parse(userString);
+
+    try {
+        const response = await fetch('https://sunbrain.onrender.com/api/purchase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                email: user.email, 
+                item: tenMon 
+            })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            user.purchases = result.purchases;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            showProfile(); 
+        } else {
+            console.error("Lỗi từ server:", await response.text());
+        }
+    } catch (error) {
+        console.error("Lỗi kết nối server:", error);
     }
 }
 
@@ -89,7 +175,6 @@ function thanhToan(tenMon) {
 // 3. TÍNH NĂNG TÀI KHOẢN (ĐĂNG NHẬP / ĐĂNG KÝ)
 // ==========================================
 
-// Bổ sung hàm toggleAuthForms bị thiếu
 function toggleAuthForms(formType) {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -109,7 +194,7 @@ function toggleAuthForms(formType) {
 function openLoginModal() {
     const modal = document.getElementById('loginModal');
     modal.style.display = 'flex';
-    toggleAuthForms('login'); // Đảm bảo luôn mở form đăng nhập đầu tiên
+    toggleAuthForms('login'); 
 }
 
 function openRegister() {
@@ -129,8 +214,6 @@ window.onclick = function(event) {
     }
 }
 
-// --- KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP ---
-
 function checkLoginStatus() {
     const userString = localStorage.getItem('currentUser');
     const authActions = document.getElementById('authActions');
@@ -138,7 +221,6 @@ function checkLoginStatus() {
 
     if (userString) {
         const user = JSON.parse(userString);
-        // Biến Tên thành một nút bấm có thể click được (thêm con trỏ chuột pointer và sự kiện onclick)
         authActions.innerHTML = `
             <span style="font-weight: bold; color: var(--primary-color); cursor: pointer;" onclick="showProfile()">
                 👤 Chào, ${user.name} ▾
@@ -153,40 +235,58 @@ function checkLoginStatus() {
     }
 }
 
-// --- HÀM MỞ GIAO DIỆN TÀI KHOẢN ---
 function showProfile() {
     const userString = localStorage.getItem('currentUser');
     if (!userString) return;
     
     const user = JSON.parse(userString);
 
-    // 1. Điền thông tin vào khung tài khoản
     document.getElementById('profileName').innerText = user.name;
     document.getElementById('profileEmail').innerText = user.email;
 
-    // 2. Ẩn trang chủ, Hiện trang cá nhân
-    document.getElementById('heroSection').style.display = 'none';
-    document.getElementById('productSection').style.display = 'none';
-    document.getElementById('profileSection').style.display = 'block';
+    const historyList = document.getElementById('purchaseHistory');
+    historyList.innerHTML = ''; 
+
+    if (!user.purchases || user.purchases.length === 0) {
+        historyList.innerHTML = '<li style="color: gray;">Bạn chưa mua tài liệu nào.</li>';
+    } else {
+        const pdfLinks = {
+            'Triết học': 'https://drive.google.com/',
+            'Kinh tế Chính trị': 'https://drive.google.com/',
+            'Chủ nghĩa Xã hội Khoa học': 'https://drive.google.com/',
+            'Tư tưởng Hồ Chí Minh': 'https://drive.google.com/',
+            'Lịch sử Đảng': 'https://drive.google.com/',
+            'Combo 2 Môn': 'https://drive.google.com/',
+            'Combo 3 Môn': 'https://drive.google.com/'
+        };
+
+        user.purchases.forEach(mon => {
+            const link = pdfLinks[mon] || '#';
+            const li = document.createElement('li');
+            li.style.marginBottom = '12px';
+            li.style.listStyleType = 'none';
+            li.innerHTML = `
+                ✅ <strong>${mon}</strong> 
+                <a href="${link}" target="_blank" style="margin-left: 10px; background-color: #2e8b57; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 14px;">
+                    ⬇️ Tải PDF
+                </a>
+            `;
+            historyList.appendChild(li);
+        });
+    }
+
+    showSection('profileSection');
 }
 
-// --- HÀM QUAY LẠI TRANG CHỦ MUA SẮM ---
-function showHome() {
-    document.getElementById('heroSection').style.display = 'block';
-    document.getElementById('productSection').style.display = 'block';
-    document.getElementById('profileSection').style.display = 'none';
-}
-
-// --- CẬP NHẬT HÀM ĐĂNG XUẤT ---
 function logout() {
     localStorage.removeItem('currentUser'); 
     checkLoginStatus(); 
-    showHome(); // Đăng xuất xong tự động văng về trang chủ
+    showHome(); 
     alert("Bạn đã đăng xuất thành công!");
 }
-// --- XỬ LÝ GỬI FORM ĐĂNG NHẬP LÊN BACKEND ---
+
 const loginForm = document.getElementById('loginForm');
-if(loginForm) { // Thêm lệnh if để tránh lỗi nếu trang không có thẻ form này
+if(loginForm) { 
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault(); 
         
@@ -196,9 +296,7 @@ if(loginForm) { // Thêm lệnh if để tránh lỗi nếu trang không có th�
         try {
             const response = await fetch('https://sunbrain.onrender.com/api/login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: email, password: password })
             });
             
@@ -220,43 +318,30 @@ if(loginForm) { // Thêm lệnh if để tránh lỗi nếu trang không có th�
         }
     });
 }
-// --- XỬ LÝ GỬI FORM ĐĂNG KÝ LÊN BACKEND ---
+
 const registerForm = document.getElementById('registerForm');
 if(registerForm) {
     registerForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Ngăn trình duyệt tải lại trang
+        event.preventDefault(); 
         
-        // Lấy dữ liệu người dùng nhập
         const name = document.getElementById('regNameInput').value;
         const email = document.getElementById('regEmailInput').value;
         const password = document.getElementById('regPasswordInput').value;
         
         try {
-            // Gửi dữ liệu xuống Python trên Render
             const response = await fetch('https://sunbrain.onrender.com/api/register', {
                 method: 'POST',
-
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 
-                    name: name, 
-                    email: email, 
-                    password: password 
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name, email: email, password: password })
             });
             
             const result = await response.json();
             
             if (response.ok) {
                 alert('Đăng ký thành công! Vui lòng đăng nhập bằng tài khoản vừa tạo.');
-                
-                // Xóa rỗng các ô vừa nhập
                 document.getElementById('regNameInput').value = '';
                 document.getElementById('regEmailInput').value = '';
                 document.getElementById('regPasswordInput').value = '';
-                
-                // Tự động gạt sang màn hình Đăng nhập
                 toggleAuthForms('login');
             } else {
                 alert('Lỗi: ' + result.detail);
@@ -267,3 +352,46 @@ if(registerForm) {
         }
     });
 }
+
+// ==========================================
+// TÍNH NĂNG POPUP THÔNG BÁO CHÀO MỪNG
+// ==========================================
+
+function showWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    if (!sessionStorage.getItem('popupShown') && popup) {
+        popup.style.display = 'flex';
+        sessionStorage.setItem('popupShown', 'true');
+    }
+}
+
+function closePopup() {
+    const popup = document.getElementById('welcomePopup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+function goToPromo() {
+    closePopup(); 
+    showSection('homeSection'); 
+    
+    window.scrollTo({
+        top: 600, 
+        behavior: 'smooth'
+    });
+}
+
+// ==========================================
+// KHỞI ĐỘNG CÁC TÍNH NĂNG KHI TẢI TRANG
+// ==========================================
+window.onload = function() {
+    checkLoginStatus();
+    
+    // 1. KHỞI ĐỘNG BANNER SLIDER
+    showSlides(slideIndex);
+    slideInterval = setInterval(autoSlide, 4000); 
+    
+    // 2. BẬT POPUP SAU KHI TẢI TRANG 1 GIÂY
+    setTimeout(showWelcomePopup, 1000); 
+};

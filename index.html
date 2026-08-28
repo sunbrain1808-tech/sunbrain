@@ -36,9 +36,6 @@
     <!-- ========================================== -->
     <!-- 1. TRANG CHỦ -->
     <!-- ========================================== -->
-    <!-- ========================================== -->
-    <!-- 1. TRANG CHỦ -->
-    <!-- ========================================== -->
     <div id="homeSection">
         <section class="hero">
             <h1>Bứt Phá Điểm Số Các Môn Đại Cương</h1>
@@ -46,13 +43,50 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- KHU VỰC THÔNG BÁO (BẠN SỬA NỘI DUNG Ở ĐÂY SAU) -->
+        <!-- BANNER QUẢNG CÁO TỰ CHUYỂN (SLIDER) -->
+        <!-- ========================================== -->
+        <div class="slider-wrapper">
+            <!-- Nút điều hướng Trái/Phải -->
+            <button class="slider-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="slider-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+
+            <!-- Các Khung ảnh (Slides) -->
+            <div class="slides-container">
+                <!-- Slide 1 (Bấm vào sẽ sang trang Môn Xã Hội) -->
+                <div class="slide fade" onclick="showSection('socialSection')">
+                    <img src="combo.png" alt="Khuyến mãi Combo">
+                    <div class="slide-text">Giảm 20% khi mua Combo 3 Môn Đại Cương</div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="slide fade" onclick="showSection('socialSection')">
+                    <img src="triết.png" alt="Triết học Mác Lênin">
+                    <div class="slide-text">Trọn bộ đề cương Triết học mới nhất 2026</div>
+                </div>
+                
+                <!-- Slide 3 (Bấm vào sẽ sang trang Free) -->
+                <div class="slide fade" onclick="showSection('freeSection')">
+                    <img src="LSĐ.png" alt="Tài liệu Free">
+                    <div class="slide-text">Khám phá kho tài liệu Miễn phí</div>
+                </div>
+            </div>
+
+            <!-- Các dấu chấm tròn nhỏ ở dưới đáy -->
+            <div class="slider-dots">
+                <span class="dot" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- KHU VỰC THÔNG BÁO -->
         <!-- ========================================== -->
         <div class="container">
             <div class="announcement-box">
                 <div class="announcement-icon">📢</div>
                 <div class="announcement-text">
-                    <strong>Thông báo mới nhất:</strong> Hệ thống đang cập nhật bộ đề cương thi cuối kỳ.!
+                    <strong>Thông báo mới nhất:</strong> Hệ thống đang cập nhật bộ đề cương thi cuối kỳ!
                 </div>
             </div>
         </div>
@@ -61,32 +95,33 @@
         <div class="container">
             <h2 class="section-title">🔥 Các Combo Ưu Đãi Hot Nhất</h2>
                 <!-- Banner Khuyến mãi / Combo -->
-                <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
-                    <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 2 Môn Đại Cương"></div>
-                    <div class="card-content">
-                        <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
-                        <h3 class="card-title" style="color: white;">Combo 2 Môn Đại Cương</h3>
-                        <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 2 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
-                        <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
-                            <span class="price" style="color: white;">79.000đ</span>
-                            <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 2 Môn')">Chốt Combo</button>
+                <div class="grid">
+                    <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
+                        <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 2 Môn Đại Cương"></div>
+                        <div class="card-content">
+                            <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
+                            <h3 class="card-title" style="color: white;">Combo 2 Môn Đại Cương</h3>
+                            <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 2 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
+                            <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
+                                <span class="price" style="color: white;">79.000đ</span>
+                                <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 2 Môn')">Chốt Combo</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
+                        <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 3 Môn Đại Cương"></div>
+                        <div class="card-content">
+                            <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
+                            <h3 class="card-title" style="color: white;">Combo 3 Môn Đại Cương</h3>
+                            <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 3 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
+                            <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
+                                <span class="price" style="color: white;">107.000đ</span>
+                                <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 3 Môn')">Chốt Combo</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white;">
-                    <div class="card-img" style="background: transparent; color: white;"><img src="combo.png" alt="Combo 3 Môn Đại Cương"></div>
-                    <div class="card-content">
-                        <span class="tag" style="background: white; color: #f39c12;">Ưu đãi đặc biệt</span>
-                        <h3 class="card-title" style="color: white;">Combo 3 Môn Đại Cương</h3>
-                        <p class="card-desc" style="color: rgba(255,255,255,0.9);">Sở hữu 3 môn lý luận chính trị bất kỳ. Tiết kiệm ngay 20% so với mua lẻ. Tặng kèm bộ bí kíp ôn thi tốc tốc.</p>
-                        <div class="price-row" style="border-top-color: rgba(255,255,255,0.3);">
-                            <span class="price" style="color: white;">107.000đ</span>
-                            <button class="buy-btn" style="background: white; color: #f39c12;" onclick="thanhToan('Combo 3 Môn')">Chốt Combo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -131,7 +166,7 @@
                     <div class="card-content">
                         <span class="tag">Môn Đại Cương</span>
                         <h3 class="card-title">Chủ nghĩa Xã hội Khoa học</h3>
-                        <p class="card-desc">Tài liệu ôn tập ngắn gọn, sơ đồ hóa các luận điểm giúp học thuộc nhanh, nhớ lâu, tự tin lấy trọn điểm tự luận.</p>
+                        <p class="card-desc">Tài liệu ôn tập ngắn gọn, sơ đồ hóa các luận điểm giúp học thuộc nhanh, nhớ lâu, tự tự tin lấy trọn điểm tự luận.</p>
                         <div class="price-row">
                             <span class="price">49.000đ</span>
                             <button class="buy-btn" onclick="thanhToan('Chủ nghĩa Xã hội Khoa học')">Mua ngay</button>
@@ -210,6 +245,22 @@
     <footer>
         <p>© 2026 Sunbrain. Học thông minh - Điểm vững vàng.</p>
     </footer>
+
+    <!-- ========================================== -->
+    <!-- KHUNG THÔNG BÁO POPUP KHI VỪA VÀO WEB -->
+    <!-- ========================================== -->
+    <div id="welcomePopup" class="modal">
+        <div class="modal-content" style="text-align: center; max-width: 450px;">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 style="color: #e74c3c; margin-bottom: 15px;">🎉 Khuyến mãi Đặc Biệt!</h2>
+            <div style="cursor: pointer; padding: 10px;" onclick="goToPromo()">
+                <img src="combo.png" alt="Khuyến mãi" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                <p style="font-size: 16px; color: #333; line-height: 1.5;">
+                    Giảm ngay 20% khi mua các <strong>Combo môn Đại cương</strong>. Bấm vào đây để xem chi tiết và chốt đơn ngay!
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- Khung Modal Đăng nhập / Đăng ký -->
     <div id="loginModal" class="modal">
