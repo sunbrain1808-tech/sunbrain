@@ -564,6 +564,51 @@ body {
     }
 }
 /* ==========================================
+   CSS CHO NÚT LIÊN HỆ THẢ NỔI
+   ========================================== */
+.floating-contact {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #1877f2; /* Màu xanh đặc trưng của Facebook */
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 50px; /* Bo cong hoàn toàn thành hình hạt đậu */
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1500; /* Đảm bảo luôn nằm trên cùng */
+    font-weight: bold;
+    font-size: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hiệu ứng nảy lên khi đưa chuột vào */
+.floating-contact:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.floating-contact img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Tự động thu gọn thành hình tròn nhỏ gọn trên màn hình điện thoại */
+@media screen and (max-width: 768px) {
+    .floating-contact span {
+        display: none; /* Giấu chữ đi */
+    }
+    .floating-contact {
+        padding: 12px;
+        border-radius: 50%; /* Trở thành hình tròn */
+        bottom: 20px;
+        right: 20px;
+    }
+}
+/* ==========================================
    FOOTER
    ========================================== */
 footer { 
